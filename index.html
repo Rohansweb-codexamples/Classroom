@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Classroom</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- Link CSS -->
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+
+<header>
+  <h1>Classroom</h1>
+  <div class="nav">
+    <button data-page="morningPage" class="active">Morning</button>
+    <button data-page="setupPage">Setup</button>
+    <button data-page="classroomPage">Classroom</button>
+    <button data-page="whiteboardPage">Whiteboard</button>
+    <button data-page="appsPage">Apps</button>
+  </div>
+</header>
+
+<main>
+
+<!-- MORNING PAGE -->
+<section id="morningPage" class="page active">
+
+  <div class="morning-layout">
+
+    <!-- SCENE AREA -->
+    <div class="morning-scene" id="morningScene">
+
+      <button id="morningFullscreenBtn">⛶</button>
+
+      <div class="scene-layer scene-sunrise active" id="sceneSunrise"></div>
+      <div class="scene-layer scene-forest" id="sceneForest"></div>
+      <div class="scene-layer scene-flowers" id="sceneFlowers"></div>
+      <div class="scene-layer scene-calm" id="sceneCalm"></div>
+
+      <!-- Birds -->
+      <div class="bird" style="top:20%; left:-10%; animation-delay:0s;"></div>
+      <div class="bird" style="top:40%; left:-20%; animation-delay:5s;"></div>
+      <div class="bird" style="top:60%; left:-15%; animation-delay:10s;"></div>
+
+      <!-- Flowers -->
+      <div class="flower" style="bottom:8%; left:15%; animation-delay:0s;"></div>
+      <div class="flower" style="bottom:6%; left:35%; animation-delay:1.5s;"></div>
+      <div class="flower" style="bottom:7%; left:55%; animation-delay:3s;"></div>
+      <div class="flower" style="bottom:9%; left:75%; animation-delay:4.5s;"></div>
+
+      <div class="morning-content">
+        <div class="morning-title">Good Morning, Class</div>
+
+        <div class="scene-chooser">
+          <span class="scene-chip active" data-scene="sunrise">Birds & Sunrise</span>
+          <span class="scene-chip" data-scene="forest">Forest</span>
+          <span class="scene-chip" data-scene="flowers">Flowers</span>
+          <span class="scene-chip" data-scene="calm">Calm Sky</span>
+        </div>
+
+        <audio id="morningAudio" controls loop>
+          <source src="https://rohansweb-codexamples.github.io/musicplayer/Raindrops.mp3" type="audio/mpeg">
+        </audio>
+
+      </div>
+    </div>
+
+    <!-- SIDE PANEL -->
+    <div>
+      <section class="card">
+        <h2>Morning Routine</h2>
+        <ul>
+          <li>Come in quietly</li>
+          <li>Hang up coat</li>
+          <li>Put homework away</li>
+          <li>Start morning work</li>
+        </ul>
+      </section>
+
+      <section class="card">
+        <h2>Today’s Focus</h2>
+        <textarea id="morningFocus" style="width:100%; height:120px;"></textarea>
+      </section>
+    </div>
+
+  </div>
+
+</section>
+
+<!-- SETUP PAGE -->
+<section id="setupPage" class="page">
+  <section class="card">
+    <h2>Setup</h2>
+
+    <div class="row">
+      <input id="setupStudentNameInput" type="text" placeholder="Student name" />
+      <button id="setupAddStudentBtn">+ Add</button>
+    </div>
+
+    <div id="setupStudentList" class="setup-student-list"></div>
+
+    <hr />
+
+    <div class="row">
+      <div>
+        <label>Main reward target</label><br />
+        <input id="rewardTargetInput" type="number" value="50" />
+      </div>
+      <div>
+        <label>Extra reward target</label><br />
+        <input id="extraRewardTargetInput" type="number" value="100" />
+      </div>
+    </div>
+
+    <button id="saveSetupBtn" class="success">Save</button>
+    <div id="setupStatus" class="small"></div>
+  </section>
+</section>
+
+<!-- CLASSROOM PAGE -->
+<section id="classroomPage" class="page">
+  <div class="container">
+
+    <!-- Behaviour -->
+    <section class="card">
+      <h2>Behaviour & Points</h2>
+
+      <div class="row">
+        <input id="studentNameInput" type="text" placeholder="Quick add student" />
+        <button id="addStudentBtn">+ Add</button>
+        <button id="clearStudentsBtn" class="secondary">Clear</button>
+      </div>
+
+      <div id="studentList" class="student-list"></div>
+    </section>
+
+    <!-- Timers -->
+    <section class="card">
+      <h2>Timers</h2>
+
+      <div class="timer-grid">
+
+        <div class="timer" data-timer-id="focus">
+          <div class="timer-title">Focus</div>
+          <div class="timer-display" id="timer-focus">10:00</div>
+          <div class="timer-buttons">
+            <button class="success" data-action="start" data-target="focus">Start</button>
+            <button class="secondary" data-action="pause" data-target="focus">Pause</button>
+            <button class="danger" data-action="reset" data-target="focus">Reset</button>
+          </div>
+        </div>
+
+        <div class="timer" data-timer-id="transition">
+          <div class="timer-title">Transition</div>
+          <div class="timer-display" id="timer-transition">02:00</div>
+          <div class="timer-buttons">
+            <button class="success" data-action="start" data-target="transition">Start</button>
+            <button class="secondary" data-action="pause" data-target="transition">Pause</button>
+            <button class="danger" data-action="reset" data-target="transition">Reset</button>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Reading & Rewards -->
+    <section class="card" style="grid-column:1/-1;">
+      <h2>Reading & Rewards</h2>
+
+      <div class="reading-summary">
+        <div><span>Total minutes</span><span id="totalMinutes">0</span></div>
+        <div><span>Total points</span><span id="totalPoints">0</span></div>
+        <div><span>Main target</span><span id="rewardTargetLabel">50</span></div>
+        <div><span>Extra target</span><span id="extraRewardTargetLabel">100</span></div>
+      </div>
+
+      <div class="row">
+        <input id="readingStudentInput" type="text" placeholder="Student" />
+        <input id="readingMinutesInput" type="number" placeholder="Minutes" />
+        <button id="addReadingBtn">+ Log</button>
+      </div>
+
+      <div class="reward-bar"><div id="rewardFill" class="reward-fill"></div></div>
+      <div class="reward-bar"><div id="extraRewardFill" class="reward-fill"></div></div>
+
+      <div id="readingLog" class="reading-log"></div>
+    </section>
+
+  </div>
+</section>
+
+<!-- WHITEBOARD PAGE -->
+<section id="whiteboardPage" class="page">
+  <div id="whiteboardContainer">
+    <div id="whiteboardToolbar">
+      <button id="wbClearBtn" class="secondary">Clear</button>
+      <button id="wbFullscreenBtn" class="secondary">Full screen</button>
+      <input type="color" id="wbColor" value="#000000" />
+      <input type="range" id="wbSize" min="2" max="20" value="4" />
+      <button id="wbEraserBtn" class="secondary">Eraser</button>
+    </div>
+    <canvas id="whiteboardCanvas"></canvas>
+  </div>
+</section>
+
+<!-- APPS PAGE -->
+<section id="appsPage" class="page">
+  <div class="apps-grid">
+    <div class="app-tile" data-url="https://classroom.google.com">Google Classroom</div>
+    <div class="app-tile" data-url="https://www.bbc.co.uk/bitesize">BBC Bitesize</div>
+    <div class="app-tile" data-url="https://whiteboard.fi">Whiteboard.fi</div>
+    <div class="app-tile" data-url="https://timer.onlineclock.net">Online Timers</div>
+  </div>
+</section>
+
+</main>
+
+<!-- JS -->
+<script src="script.js"></script>
+
+</body>
+</html>

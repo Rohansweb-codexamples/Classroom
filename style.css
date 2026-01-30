@@ -1,0 +1,358 @@
+:root {
+  --primary: #2563eb;
+  --primary-dark: #1d4ed8;
+  --accent: #f59e0b;
+  --bg: #f3f4f6;
+  --card: #ffffff;
+  --danger: #dc2626;
+  --success: #16a34a;
+  --text: #111827;
+}
+
+* {
+  box-sizing: border-box;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  overflow: hidden;
+}
+
+/* HEADER */
+header {
+  background: var(--primary);
+  color: white;
+  padding: 0.6rem 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+header h1 {
+  margin: 0;
+  font-size: 1.4rem;
+}
+
+.nav {
+  display: flex;
+  gap: 0.4rem;
+  flex-wrap: wrap;
+}
+
+.nav button {
+  border-radius: 999px;
+  border: none;
+  padding: 0.3rem 0.8rem;
+  font-size: 0.85rem;
+  cursor: pointer;
+  background: rgba(255,255,255,0.2);
+  color: white;
+}
+
+.nav button.active {
+  background: white;
+  color: var(--primary-dark);
+}
+
+/* MAIN */
+main {
+  height: calc(100vh - 60px);
+  padding: 0.75rem;
+  overflow: hidden;
+}
+
+.page {
+  display: none;
+  height: 100%;
+}
+
+.page.active {
+  display: block;
+}
+
+/* CARDS */
+.card {
+  background: var(--card);
+  border-radius: 0.75rem;
+  padding: 0.75rem 1rem;
+  box-shadow: 0 8px 20px rgba(15, 23, 42, 0.08);
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.card h2 {
+  margin-top: 0;
+  font-size: 1.1rem;
+}
+
+/* MORNING PAGE */
+.morning-layout {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 0.75rem;
+  height: 100%;
+}
+
+.morning-scene {
+  border-radius: 1rem;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  text-align: center;
+}
+
+.morning-title {
+  font-size: 2.2rem;
+  font-weight: 700;
+  text-shadow: 0 4px 12px rgba(0,0,0,0.4);
+}
+
+.scene-chooser {
+  margin-top: 0.75rem;
+  display: flex;
+  gap: 0.4rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.scene-chip {
+  border-radius: 999px;
+  padding: 0.25rem 0.8rem;
+  font-size: 0.85rem;
+  background: rgba(255,255,255,0.2);
+  border: 1px solid rgba(255,255,255,0.4);
+  cursor: pointer;
+}
+
+.scene-chip.active {
+  background: white;
+  color: #111827;
+}
+
+/* SCENE LAYERS */
+.scene-layer {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.8s;
+}
+
+.scene-layer.active {
+  opacity: 1;
+}
+
+.scene-sunrise {
+  background: radial-gradient(circle at top, #f97316 0%, #facc15 25%, #22c55e 60%, #0ea5e9 100%);
+  animation: slowPan 40s linear infinite alternate;
+}
+
+.scene-forest {
+  background: linear-gradient(180deg, #022c22 0%, #064e3b 40%, #16a34a 100%);
+}
+
+.scene-flowers {
+  background: linear-gradient(180deg, #4c1d95 0%, #7e22ce 40%, #f97316 100%);
+}
+
+.scene-calm {
+  background: radial-gradient(circle at top, #0ea5e9 0%, #1d4ed8 40%, #020617 100%);
+}
+
+@keyframes slowPan {
+  from { transform: scale(1.05) translateX(-10px); }
+  to { transform: scale(1.1) translateX(10px); }
+}
+
+/* BIRDS */
+.bird {
+  position: absolute;
+  width: 40px;
+  height: 20px;
+  border-radius: 20px 20px 5px 5px;
+  background: rgba(255,255,255,0.9);
+  animation: flyAcross 22s linear infinite;
+}
+
+@keyframes flyAcross {
+  0% { transform: translateX(-15%) translateY(0); opacity: 0; }
+  10% { opacity: 1; }
+  90% { opacity: 1; }
+  100% { transform: translateX(115%) translateY(-20px); opacity: 0; }
+}
+
+/* FLOWERS */
+.flower {
+  position: absolute;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: #facc15;
+  box-shadow: 0 0 0 10px rgba(244, 63, 94, 0.8),
+              0 0 0 20px rgba(251, 113, 133, 0.5);
+  animation: sway 6s ease-in-out infinite;
+}
+
+@keyframes sway {
+  0%,100% { transform: translateY(0) rotate(-3deg); }
+  50% { transform: translateY(-6px) rotate(3deg); }
+}
+
+/* FULLSCREEN BUTTON */
+#morningFullscreenBtn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: rgba(0,0,0,0.4);
+  border: 1px solid rgba(255,255,255,0.6);
+  color: white;
+  padding: 0.3rem 0.6rem;
+  border-radius: 6px;
+  cursor: pointer;
+  z-index: 10;
+  font-size: 0.85rem;
+}
+
+/* SETUP PAGE */
+.setup-student-list {
+  flex: 1;
+  overflow-y: auto;
+  border-top: 1px solid #e5e7eb;
+  margin-top: 0.5rem;
+  padding-top: 0.25rem;
+}
+
+.setup-student-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.25rem 0;
+  border-bottom: 1px solid #f3f4f6;
+}
+
+/* CLASSROOM PAGE */
+.container {
+  height: 100%;
+  display: grid;
+  grid-template-columns: 2fr 1.5fr;
+  gap: 0.75rem;
+}
+
+.student-list {
+  flex: 1;
+  overflow-y: auto;
+  border-top: 1px solid #e5e7eb;
+  margin-top: 0.5rem;
+}
+
+.student {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.35rem 0.1rem;
+  border-bottom: 1px solid #f3f4f6;
+}
+
+.badge {
+  border-radius: 999px;
+  padding: 0.15rem 0.6rem;
+  font-size: 0.75rem;
+  background: #e5e7eb;
+}
+
+.badge.good {
+  background: rgba(22,163,74,0.12);
+  color: var(--success);
+}
+
+.badge.warning {
+  background: rgba(245,158,11,0.12);
+  color: var(--accent);
+}
+
+.badge.points {
+  background: rgba(37,99,235,0.12);
+  color: var(--primary-dark);
+}
+
+/* TIMERS */
+.timer-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 0.5rem;
+}
+
+.timer {
+  border-radius: 0.75rem;
+  padding: 0.5rem;
+  background: #f9fafb;
+  border: 1px solid #e5e7eb;
+}
+
+.timer-display {
+  font-size: 1.3rem;
+  font-weight: 700;
+}
+
+/* READING & REWARDS */
+.reward-bar {
+  margin-top: 0.4rem;
+  background: #e5e7eb;
+  border-radius: 999px;
+  overflow: hidden;
+  height: 14px;
+}
+
+.reward-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #22c55e, #facc15, #f97316);
+  width: 0%;
+  transition: width 0.3s;
+}
+
+/* WHITEBOARD */
+#whiteboardContainer {
+  background: #111827;
+  border-radius: 0.75rem;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+#whiteboardToolbar {
+  padding: 0.4rem;
+  background: #020617;
+  color: white;
+  display: flex;
+  gap: 0.5rem;
+}
+
+#whiteboardCanvas {
+  flex: 1;
+  background: white;
+  touch-action: none;
+}
+
+/* APPS PAGE */
+.apps-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 0.75rem;
+}
+
+.app-tile {
+  background: var(--card);
+  padding: 1rem;
+  border-radius: 0.75rem;
+  text-align: center;
+  cursor: pointer;
+  box-shadow: 0 8px 20px rgba(15,23,42,0.08);
+}
